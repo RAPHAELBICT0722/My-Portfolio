@@ -9,16 +9,32 @@
 </head>
     
     <body>
+    <?php
+    // Database connection parameters
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "raphael";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    ?>
+
+
         <div class="h1">
         <h1>RAPHAEL CHIONA</h1> 
     </div>  
     <div class="menu-bar">
         
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a class="active" href="Contact.html">Contact</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="skills.html">Skills</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a class="active" href="Contact.php">Contact</a></li>
+            <li><a href="projects.php">Projects</a></li>
+            <li><a href="skills.php">Skills</a></li>
             
         </ul>
     </div>
@@ -57,8 +73,25 @@
         <div class="home_text">
 <img src="rapha.jpg" alt="" srcset="">
 <h2>RAPHAEL CHIONA</h2>
-<h3>NETWORK ADMINISTRATOR | WEB DESIGNER | COMPUTER SYSTEM ADMINISTRATOR</h3>
-<P>Raphael is a talented and accomplished computer engineer who has made significant contributions to the field of technology. Born on 07/02/1997 in Zomba,Raphael  developed a passion for computers and technology from a young age. This biography explores Raphael's journey, achievements,. and impact as a computer engineer.</P><br>
+
+    <?php
+    // SQL query to retrieve data from the database
+    $sql = "SELECT * FROM home";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // Output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "" . $row["aboutme"]. "<br>";
+        }
+    } else {
+        echo "0 results";
+    }
+    // Close the connection
+    $conn->close();
+    ?>
+
+
 <a href="Contact.html">Contact Me</a><br>
 <a href="Projects.html">Projects</a>
         </div>
